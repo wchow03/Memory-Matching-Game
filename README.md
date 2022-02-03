@@ -14,5 +14,5 @@ The reason I was interested in designing a memory based game is
 because it helps develop memorization skills while
 being fun to play. The goal of this project was
 to design a game that can be played by *anyone* as it is
-not too difficult to play.
+not too difficult.
 
