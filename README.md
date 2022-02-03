@@ -16,3 +16,10 @@ being fun to play. The goal of this project was
 to design a game that can be played by *anyone* as it is
 not too difficult.
 
+### User Stories
+
+- As a user, I want to be able to choose any two cards
+- As a user, I want to be able to select the mode 
+  difficulty (number of cards)
+- As a user, I want to be able to quit the game anytime
+
