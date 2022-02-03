@@ -10,7 +10,7 @@ be discarded, otherwise they will be turned back over.
 The ***objective*** of the game is to match 
 all the cards until there are none remaining.
 
-The reason I was interested in designing a memory game is
+The reason I was interested in designing a memory based game is
 because it helps develop memorization skills while
 being fun to play. The goal of this project was
 to design a game that can be played by *anyone* as it is
