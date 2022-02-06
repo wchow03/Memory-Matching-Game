@@ -85,27 +85,15 @@ public class HandTest {
     }
 
     @Test
-    void testCompareDifferentCards() {
-        Card c1 = new Card('A');
-        Card c2 = new Card('B');
-        hand.addCard(c1);
-        hand.addCard(c2);
-
-        hand.compareCards(0, 1);
-        assertEquals('A', hand.getCardAt(0));
-        assertEquals('B', hand.getCardAt(1));
-        assertEquals(2, hand.getHandSize());
+    void testCreateHandTwelveCards() {
+        hand.createHand(6);
+        assertEquals(12, hand.getHandSize());
     }
 
     @Test
-    void testCompareSameCards() {
-        Card c1 = new Card('A');
-        Card c2 = new Card('A');
-        hand.addCard(c1);
-        hand.addCard(c2);
-
-        hand.compareCards(0, 1);
-        assertEquals(0, hand.getHandSize());
+    void testCreateHandTwentyCards() {
+        hand.createHand(10);
+        assertEquals(20, hand.getHandSize());
     }
 
 }

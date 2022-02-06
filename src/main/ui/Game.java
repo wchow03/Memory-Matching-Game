@@ -1,9 +1,7 @@
 package ui;
 
-import model.Card;
 import model.Hand;
 
-import java.util.Collections;
 import java.util.Scanner;
 
 // Memory matching game
@@ -19,8 +17,9 @@ public class Game {
     }
 
     // MODIFIES: this
-    // EFFECTS: takes in and processes user input
+    // EFFECTS: begins application
     public void runGame() {
+        hand = new Hand();
         scanner = new Scanner(System.in);
         continuePlaying = true;
 
@@ -31,20 +30,24 @@ public class Game {
             if (hand.getHandSize() == 0) {
                 System.out.println("Congratulations, you won!");
             }
+            playAgain();
+        }
+    }
 
-            String playAgain;
-            System.out.print("Would you like to play again? (yes / no): ");
-            while (true) {
-                playAgain = (scanner.next()).toLowerCase();
-                if (playAgain.equals("no")) {
-                    continuePlaying = false;
-                    break;
-                } else if (playAgain.equals("yes")) {
-                    continuePlaying = true;
-                    break;
-                } else {
-                    System.out.print("Please choose one of (yes or no): ");
-                }
+    // EFFECTS: processes user input to ask if they want to play again
+    public void playAgain() {
+        String playAgain;
+        System.out.print("Would you like to play again? (yes / no): ");
+        while (true) {
+            playAgain = (scanner.next()).toLowerCase();
+            if (playAgain.equals("no")) {
+                continuePlaying = false;
+                break;
+            } else if (playAgain.equals("yes")) {
+                continuePlaying = true;
+                break;
+            } else {
+                System.out.print("Please choose one of (yes or no): ");
             }
         }
     }
@@ -52,38 +55,24 @@ public class Game {
     // MODIFIES: this
     // EFFECTS: processes user input
     public void chooseDifficulty() {
+        hand.getHand().clear();
         System.out.print("Choose a difficulty [Easy(12 cards), Medium(16 cards), Hard(20 cards)]: ");
         String difficulty;
         while (true) {
             difficulty = (scanner.next()).toLowerCase();
             if (difficulty.equals("easy")) {
-                createHand(6);
+                hand.createHand(6);
                 break;
             } else if (difficulty.equals("medium")) {
-                createHand(8);
+                hand.createHand(8);
                 break;
             } else if (difficulty.equals("hard")) {
-                createHand(10);
+                hand.createHand(10);
                 break;
             } else {
                 System.out.print("That mode does not exist. Please choose one of: Easy, Medium, Hard: ");
             }
         }
-    }
-
-    // MODIFIES: this
-    // EFFECTS: creates a list of cards with n cards
-    // and n/2 pairs that have the same letter
-    public void createHand(int n) {
-        hand = new Hand();
-        int l = 65;
-        for (int i = 0; i < n; i++) {
-            Card card = new Card((char)l);
-            hand.addCard(card);
-            hand.addCard(card);
-            l++;
-        }
-        Collections.shuffle(hand.getHand());
     }
 
     // EFFECTS: processes user input
@@ -93,15 +82,6 @@ public class Game {
             chooseIndexes();
             continuePlaying = keepPlaying();
         }
-    }
-
-    // EFFECTS: prints the cards left as indexes (uses 0 indexing)
-    public void printHand() {
-        String board = "[";
-        for (int i = 0; i < hand.getHandSize(); i++) {
-            board +=  i + "] [";
-        }
-        System.out.println(board.substring(0, board.length() - 2));
     }
 
     // MODIFIES: this
@@ -119,7 +99,7 @@ public class Game {
         }
         System.out.println("Letter at index " + i1 + ": " + hand.getCardAt(i1));
         System.out.println("Letter at index " + i2 + ": " + hand.getCardAt(i2));
-        hand.compareCards(i1, i2);
+        compareCards(i1, i2);
     }
 
     // REQUIRES: a non empty string
@@ -132,6 +112,28 @@ public class Game {
             } catch (NumberFormatException exception) {
                 System.out.print("Please enter an integer: ");
             }
+        }
+    }
+
+    // REQUIRES: two different integers
+    // MODIFIES: this
+    // EFFECTS: if cards match, returns true and removes the cards from hand,
+    // otherwise returns false
+    public void compareCards(int i1, int i2) {
+        // fix you can't choose two same index's
+        char letter1 = hand.getCardAt(i1);
+        char letter2 = hand.getCardAt(i2);
+        if (letter1 == letter2) {
+            if (i1 > i2) {
+                hand.removeCard(i1);
+                hand.removeCard(i2);
+            } else {
+                hand.removeCard(i2);
+                hand.removeCard(i1);
+            }
+            System.out.println("It's a match!");
+        } else {
+            System.out.println("Not a match.");
         }
     }
 
@@ -158,5 +160,14 @@ public class Game {
                 System.out.println("That is not a valid option, please try again.");
             }
         }
+    }
+
+    // EFFECTS: prints the cards left as indexes (uses 0 indexing)
+    public void printHand() {
+        String board = "[";
+        for (int i = 0; i < hand.getHandSize(); i++) {
+            board +=  i + "] [";
+        }
+        System.out.println(board.substring(0, board.length() - 2));
     }
 }
