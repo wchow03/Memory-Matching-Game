@@ -144,28 +144,6 @@ public class Game {
         return i;
     }
 
-    // REQUIRES: two different integers
-    // MODIFIES: this
-    // EFFECTS: removes the cards in hand if cards at index i1 and i2 match,
-    // otherwise does nothing
-//    public void compareCards(int i1, int i2) {
-//        // fix you can't choose two same index's
-//        char letter1 = hand.getCardAt(i1);
-//        char letter2 = hand.getCardAt(i2);
-//        if (letter1 == letter2) {
-//            if (i1 > i2) {
-//                hand.removeCard(i1);
-//                hand.removeCard(i2);
-//            } else {
-//                hand.removeCard(i2);
-//                hand.removeCard(i1);
-//            }
-//            System.out.println("It's a match!");
-//        } else {
-//            System.out.println("Not a match.");
-//        }
-//    }
-
     // EFFECTS: returns true if enter key is pressed, and false if "quit" is entered
     public boolean keepPlaying() {
         Scanner scanner = new Scanner(System.in);
