@@ -32,7 +32,7 @@ public class Game {
                 System.out.println("Congratulations, you won!");
             }
 
-            String playAgain = "";
+            String playAgain;
             System.out.print("Would you like to play again? (yes / no): ");
             while (true) {
                 playAgain = (scanner.next()).toLowerCase();

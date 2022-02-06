@@ -1,7 +1,6 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 // Represents a list of Cards
 public class Hand {
