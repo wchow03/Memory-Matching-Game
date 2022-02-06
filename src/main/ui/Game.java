@@ -15,6 +15,7 @@ public class Game {
     // EFFECTS: starts the application
     public Game() {
         runGame();
+        System.out.println("Thanks for playing!");
     }
 
     // MODIFIES: this
@@ -46,13 +47,11 @@ public class Game {
                 }
             }
         }
-        System.out.println("Thanks for playing!");
     }
 
     // MODIFIES: this
     // EFFECTS: processes user input
     public void chooseDifficulty() {
-        int n = 0;
         System.out.print("Choose a difficulty [Easy(12 cards), Medium(16 cards), Hard(20 cards)]: ");
         String difficulty;
         while (true) {
@@ -78,7 +77,7 @@ public class Game {
     public void createHand(int n) {
         hand = new Hand();
         int l = 65;
-        for (int i=0; i<n; i++) {
+        for (int i = 0; i < n; i++) {
             Card card = new Card((char)l);
             hand.addCard(card);
             hand.addCard(card);
@@ -98,14 +97,11 @@ public class Game {
 
     // EFFECTS: prints the cards left as indexes (uses 0 indexing)
     public void printHand() {
-        String cards = "[";
         String board = "[";
-        for (int i=0; i<hand.getHand().size(); i++) {
-            board +=  i+"] [";
+        for (int i = 0; i < hand.getHand().size(); i++) {
+            board +=  i + "] [";
         }
-
-        System.out.println(cards.substring(0, cards.length()-2));
-        System.out.println(board.substring(0, board.length()-2));
+        System.out.println(board.substring(0, board.length() - 2));
     }
 
     // MODIFIES: this
@@ -116,20 +112,20 @@ public class Game {
         while (true) {
             i1 = chooseIndex("first");
             i2 = chooseIndex("second");
-            if (!(i1==i2)) {
+            if (!(i1 == i2)) {
                 break;
             }
             System.out.println("Please choose two different indexes.");
         }
-        System.out.println("Letter at index 1: " + hand.getCardAt(i1));
-        System.out.println("Letter at index 2: " + hand.getCardAt(i2));
+        System.out.println("Letter at index " + i1 + ": " + hand.getCardAt(i1));
+        System.out.println("Letter at index " + i2 + ": " + hand.getCardAt(i2));
         compareCards(i1, i2);
     }
 
     // REQUIRES: a non empty string
     // EFFECTS: gets user to choose an integer in the range of hand size
     public int chooseIndex(String str) {
-        System.out.print("Choose the "+str+" index: ");
+        System.out.print("Choose the " + str + " index: ");
         while (true) {
             try {
                 return checkBoundary(Integer.parseInt(scanner.next()));
@@ -157,7 +153,7 @@ public class Game {
         char letter1 = hand.getCardAt(i1);
         char letter2 = hand.getCardAt(i2);
         if (letter1 == letter2) {
-            if (i1>i2) {
+            if (i1 > i2) {
                 hand.removeCard(i1);
                 hand.removeCard(i2);
             } else {
