@@ -6,7 +6,7 @@ import model.Hand;
 import java.util.Collections;
 import java.util.Scanner;
 
-// Memory matching game application
+// Memory matching game
 public class Game {
     private Scanner scanner;
     private Hand hand;
@@ -98,7 +98,7 @@ public class Game {
     // EFFECTS: prints the cards left as indexes (uses 0 indexing)
     public void printHand() {
         String board = "[";
-        for (int i = 0; i < hand.getHand().size(); i++) {
+        for (int i = 0; i < hand.getHandSize(); i++) {
             board +=  i + "] [";
         }
         System.out.println(board.substring(0, board.length() - 2));
@@ -119,7 +119,7 @@ public class Game {
         }
         System.out.println("Letter at index " + i1 + ": " + hand.getCardAt(i1));
         System.out.println("Letter at index " + i2 + ": " + hand.getCardAt(i2));
-        compareCards(i1, i2);
+        hand.compareCards(i1, i2);
     }
 
     // REQUIRES: a non empty string
@@ -148,23 +148,23 @@ public class Game {
     // MODIFIES: this
     // EFFECTS: removes the cards in hand if cards at index i1 and i2 match,
     // otherwise does nothing
-    public void compareCards(int i1, int i2) {
-        // fix you can't choose two same index's
-        char letter1 = hand.getCardAt(i1);
-        char letter2 = hand.getCardAt(i2);
-        if (letter1 == letter2) {
-            if (i1 > i2) {
-                hand.removeCard(i1);
-                hand.removeCard(i2);
-            } else {
-                hand.removeCard(i2);
-                hand.removeCard(i1);
-            }
-            System.out.println("It's a match!");
-        } else {
-            System.out.println("Not a match.");
-        }
-    }
+//    public void compareCards(int i1, int i2) {
+//        // fix you can't choose two same index's
+//        char letter1 = hand.getCardAt(i1);
+//        char letter2 = hand.getCardAt(i2);
+//        if (letter1 == letter2) {
+//            if (i1 > i2) {
+//                hand.removeCard(i1);
+//                hand.removeCard(i2);
+//            } else {
+//                hand.removeCard(i2);
+//                hand.removeCard(i1);
+//            }
+//            System.out.println("It's a match!");
+//        } else {
+//            System.out.println("Not a match.");
+//        }
+//    }
 
     // EFFECTS: returns true if enter key is pressed, and false if "quit" is entered
     public boolean keepPlaying() {
