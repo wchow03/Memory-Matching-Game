@@ -20,7 +20,7 @@ public class HandTest {
     void testConstructor() {
         ArrayList<Card> cards = hand.getHand();
         assertTrue(cards.isEmpty());
-        assertEquals(0, cards.size());
+        assertEquals(0, hand.getHandSize());
     }
 
     @Test
@@ -31,6 +31,7 @@ public class HandTest {
 
         ArrayList<Card> cards = hand.getHand();
         assertEquals(1, cards.size());
+        assertEquals(1, hand.getHandSize());
     }
 
     @Test
@@ -47,16 +48,17 @@ public class HandTest {
 
         ArrayList<Card> cards = hand.getHand();
         assertEquals(3, cards.size());
+        assertEquals(3, hand.getHandSize());
     }
 
     @Test
     void testRemoveOneCard() {
         Card c1 = new Card('A');
         hand.addCard(c1);
-        hand.removeCard(c1);
+        hand.removeCard(0);
         ArrayList<Card> cards = hand.getHand();
         assertTrue(cards.isEmpty());
-        assertEquals(0, cards.size());
+        assertEquals(0, hand.getHandSize());
     }
 
     @Test
@@ -67,17 +69,20 @@ public class HandTest {
         hand.addCard(c1);
         hand.addCard(c2);
         hand.addCard(c3);
-        hand.removeCard(c1);
+
+        hand.removeCard(0);
         assertEquals('B', hand.getCardAt(0));
         assertEquals('C', hand.getCardAt(1));
 
         ArrayList<Card> cards = hand.getHand();
         assertEquals(2, cards.size());
+        assertEquals(2, hand.getHandSize());
 
-        hand.removeCard(c3);
+        hand.removeCard(1);
         assertEquals('B', hand.getCardAt(0));
 
         assertEquals(1, cards.size());
+        assertEquals(1, hand.getHandSize());
     }
 
 

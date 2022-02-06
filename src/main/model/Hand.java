@@ -20,9 +20,9 @@ public class Hand {
 
     // REQUIRES: a Card object
     // MODIFIES: this
-    // EFFECTS: removes card from list of cards
-    public void removeCard(Card card) {
-        hand.remove(card);
+    // EFFECTS: removes card at specified index
+    public void removeCard(int i) {
+        hand.remove(i);
     }
 
     public char getCardAt(int i) {
@@ -31,5 +31,9 @@ public class Hand {
 
     public ArrayList<Card> getHand() {
         return hand;
+    }
+
+    public int getHandSize() {
+        return hand.size();
     }
 }
