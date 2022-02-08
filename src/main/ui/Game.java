@@ -2,6 +2,7 @@ package ui;
 
 import model.Hand;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 // Memory matching game
@@ -137,11 +138,19 @@ public class Game {
         }
     }
 
+    // REQUIRES: any integer
     // EFFECTS: returns an integer in the range of the hand size
     public int checkBoundary(int i) {
-        while (i >= hand.getHandSize() || i < 0) {
-            System.out.print("Please choose an index in the given range: ");
-            i = scanner.nextInt();
+        while (true) {
+            try {
+                while (i >= hand.getHandSize() || i < 0) {
+                    System.out.print("Please choose an index in the given range: ");
+                    i = Integer.parseInt(scanner.next());
+                }
+                break;
+            } catch (NumberFormatException exception) {
+                System.out.println("Please choose a number and is in the given range.");
+            }
         }
         return i;
     }
