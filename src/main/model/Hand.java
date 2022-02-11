@@ -27,8 +27,8 @@ public class Hand {
     }
 
     // MODIFIES: this
-    // EFFECTS: creates a list of cards with n cards
-    // and n/2 pairs that have the same letter
+    // EFFECTS: creates a list of cards with n*2 cards
+    // and n pairs that have the same letter
     public void createHand(int n) {
         int l = 65;
         for (int i = 0; i < n; i++) {
