@@ -22,4 +22,6 @@ not too difficult.
 - As a user, I want to be able to select the mode 
   difficulty (number of cards)
 - As a user, I want to be able to quit the game anytime
+- As a user, I want to be able to save the state of the cards in the game
+- As a user, I want to be able to load and resume the game where I left off
 
