@@ -14,7 +14,6 @@ public class Game {
     // EFFECTS: starts the application
     public Game() {
         runGame();
-        System.out.println("Thanks for playing!");
     }
 
     // MODIFIES: this
@@ -33,6 +32,7 @@ public class Game {
             }
             playAgain();
         }
+        System.out.println("Thanks for playing!");
     }
 
     // EFFECTS: processes user input to ask if they want to play again

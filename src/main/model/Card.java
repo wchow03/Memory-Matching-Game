@@ -4,7 +4,7 @@ package model;
 public class Card {
     private final char letter;
 
-    // REQUIRES: any capital letter
+    // REQUIRES: any character
     // EFFECTS: constructs a card that has a capital letter
     public Card(char letter) {
         this.letter = letter;
