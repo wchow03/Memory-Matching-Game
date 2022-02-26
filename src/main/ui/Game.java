@@ -1,24 +1,33 @@
 package ui;
 
 import model.Hand;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 // Memory matching game
 public class Game {
+    private static final String SAVE_FILE = "./data/saveHand.json";
     private Scanner scanner;
     private Hand hand;
     private boolean continuePlaying;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // EFFECTS: starts the application
     public Game() {
+        jsonWriter = new JsonWriter(SAVE_FILE);
+        jsonReader = new JsonReader(SAVE_FILE);
         runGame();
     }
 
     // MODIFIES: this
     // EFFECTS: begins application
-    public void runGame() {
+    private void runGame() {
         hand = new Hand();
         scanner = new Scanner(System.in);
         continuePlaying = true;
@@ -36,7 +45,7 @@ public class Game {
     }
 
     // EFFECTS: processes user input to ask if they want to play again
-    public void playAgain() {
+    private void playAgain() {
         String playAgain;
         System.out.print("Would you like to play again? (yes / no): ");
         while (true) {
@@ -55,29 +64,33 @@ public class Game {
 
     // MODIFIES: this
     // EFFECTS: processes user input
-    public void chooseDifficulty() {
+    private void chooseDifficulty() {
         hand.getHand().clear();
-        System.out.print("Choose a difficulty [Easy(12 cards), Medium(16 cards), Hard(20 cards)]: ");
-        String difficulty;
+        System.out.print("Choose a difficulty or load from save ");
+        System.out.print("[Easy(12 cards), Medium(16 cards), Hard(20 cards), Load from save]: ");
+        String option;
         while (true) {
-            difficulty = (scanner.next()).toLowerCase();
-            if (difficulty.equals("easy")) {
+            option = (scanner.next()).toLowerCase();
+            if (option.equals("load")) {
+                loadGame();
+                break;
+            } else if (option.equals("easy")) {
                 hand.createHand(6);
                 break;
-            } else if (difficulty.equals("medium")) {
+            } else if (option.equals("medium")) {
                 hand.createHand(8);
                 break;
-            } else if (difficulty.equals("hard")) {
+            } else if (option.equals("hard")) {
                 hand.createHand(10);
                 break;
             } else {
-                System.out.print("That mode does not exist. Please choose one of: Easy, Medium, Hard: ");
+                System.out.print("That mode does not exist. Please choose one of: Easy, Medium, Hard, Load: ");
             }
         }
     }
 
     // EFFECTS: processes user input
-    public void beginPlaying() {
+    private void beginPlaying() {
         while (continuePlaying && (hand.getHandSize() > 0)) {
             printHand();
             chooseIndexes();
@@ -87,7 +100,7 @@ public class Game {
 
     // MODIFIES: this
     // EFFECTS: has the user pick two indexes
-    public void chooseIndexes() {
+    private void chooseIndexes() {
         int i1;
         int i2;
         while (true) {
@@ -105,7 +118,7 @@ public class Game {
 
     // REQUIRES: a non empty string
     // EFFECTS: gets user to choose an integer in the range of hand size
-    public int chooseIndex(String str) {
+    private int chooseIndex(String str) {
         System.out.print("Choose the " + str + " index: ");
         while (true) {
             try {
@@ -120,7 +133,7 @@ public class Game {
     // MODIFIES: this
     // EFFECTS: if cards match, returns true and removes the cards from hand,
     // otherwise returns false
-    public void compareCards(int i1, int i2) {
+    private void compareCards(int i1, int i2) {
         // fix you can't choose two same index's
         char letter1 = hand.getCardAt(i1);
         char letter2 = hand.getCardAt(i2);
@@ -140,7 +153,7 @@ public class Game {
 
     // REQUIRES: any integer
     // EFFECTS: returns an integer in the range of the hand size
-    public int checkBoundary(int i) {
+    private int checkBoundary(int i) {
         while (true) {
             try {
                 while (i >= hand.getHandSize() || i < 0) {
@@ -156,12 +169,14 @@ public class Game {
     }
 
     // EFFECTS: returns true if enter key is pressed, and false if "quit" is entered
-    public boolean keepPlaying() {
+    private boolean keepPlaying() {
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            System.out.print("Press enter to continue or type quit to exit game: ");
+            System.out.print("Press enter to continue, save to save progress, or quit to exit game: ");
             String option = (scanner.nextLine()).toLowerCase();
-            if (option.equals("quit")) {
+            if (option.equals("save")) {
+                saveGame();
+            } else if (option.equals("quit")) {
                 return false;
             } else if (option.equals("")) {
                 return true;
@@ -172,11 +187,38 @@ public class Game {
     }
 
     // EFFECTS: prints the cards left as indexes (uses 0 indexing)
-    public void printHand() {
+    private void printHand() {
         String board = "[";
         for (int i = 0; i < hand.getHandSize(); i++) {
             board +=  i + "] [";
         }
         System.out.println(board.substring(0, board.length() - 2));
+    }
+
+    // Method modelled after saveWorkRoom in
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
+    // EFFECTS: saves game to file
+    private void saveGame() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(hand);
+            jsonWriter.close();
+            System.out.println("Game saved to " + SAVE_FILE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to " + SAVE_FILE);
+        }
+    }
+
+    // Method modelled after loadWorkRoom
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
+    // MODIFIES: this
+    // EFFECTS: loads saved hand from file
+    private void loadGame() {
+        try {
+            hand = jsonReader.read();
+            System.out.println("Game loaded from " + SAVE_FILE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from " + SAVE_FILE);
+        }
     }
 }

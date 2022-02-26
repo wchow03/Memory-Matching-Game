@@ -1,10 +1,14 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
 // Represents a list of Cards
-public class Hand {
+public class Hand implements Writable {
     private ArrayList<Card> hand;
 
     // EFFECTS: creates an empty list of cards
@@ -38,6 +42,22 @@ public class Hand {
             l++;
         }
         Collections.shuffle(hand);
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("hand", handToJson());
+        return json;
+    }
+
+    // EFFECTS: returns cards in hand as JSON array
+    public JSONArray handToJson() {
+        JSONArray jsonArray = new JSONArray();
+        for (Card c : hand) {
+            jsonArray.put(c.toJson());
+        }
+        return jsonArray;
     }
 
     public char getCardAt(int i) {
