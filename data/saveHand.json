@@ -1,10 +1,12 @@
 {"hand": [
-    {"cardLetter": "D"},
     {"cardLetter": "E"},
-    {"cardLetter": "D"},
+    {"cardLetter": "F"},
+    {"cardLetter": "A"},
+    {"cardLetter": "C"},
     {"cardLetter": "E"},
-    {"cardLetter": "J"},
-    {"cardLetter": "G"},
-    {"cardLetter": "G"},
-    {"cardLetter": "J"}
+    {"cardLetter": "A"},
+    {"cardLetter": "C"},
+    {"cardLetter": "F"},
+    {"cardLetter": "D"},
+    {"cardLetter": "D"}
 ]}

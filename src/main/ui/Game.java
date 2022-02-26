@@ -188,9 +188,9 @@ public class Game {
 
     // EFFECTS: prints the cards left as indexes (uses 0 indexing)
     private void printHand() {
-        String board = "[";
+        StringBuilder board = new StringBuilder("[");
         for (int i = 0; i < hand.getHandSize(); i++) {
-            board +=  i + "] [";
+            board.append(i).append("] [");
         }
         System.out.println(board.substring(0, board.length() - 2));
     }
