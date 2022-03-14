@@ -1,9 +1,12 @@
 package ui;
 
+import model.Hand;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class BoardUI extends JFrame {
+    private Hand hand;
     private OptionPanel optionPanel;
     private GamePanel gamePanel;
 
@@ -13,8 +16,10 @@ public class BoardUI extends JFrame {
         this.setSize(600, 650);
         this.setResizable(false);
 
-        optionPanel = new OptionPanel();
-        gamePanel = new GamePanel(cards);
+        hand = new Hand();
+
+        optionPanel = new OptionPanel(hand);
+        gamePanel = new GamePanel(cards, hand);
 
         this.add(optionPanel, BorderLayout.NORTH);
         this.add(gamePanel);

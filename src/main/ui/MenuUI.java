@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 // Represents the menu window
 public class MenuUI extends JFrame implements ActionListener {
@@ -19,12 +20,12 @@ public class MenuUI extends JFrame implements ActionListener {
         this.setTitle("Menu");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(500, 125);
-        this.setVisible(true);
         this.setResizable(false);
         this.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 10));
 
         createModeButtons();
         createLoadStartButtons();
+        this.setVisible(true);
     }
 
     // EFFECTS: creates mode buttons

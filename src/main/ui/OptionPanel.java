@@ -1,17 +1,26 @@
 package ui;
 
+import model.Hand;
+import persistence.JsonWriter;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 
 public class OptionPanel extends JPanel implements ActionListener {
+    private static final String SAVE_FILE = "./data/saveGame.json";
+    private Hand hand;
+    private JButton saveButton;
+    private JsonWriter jsonWriter = new JsonWriter(SAVE_FILE);
 
-    public OptionPanel() {
+    public OptionPanel(Hand hand) {
+        this.hand = hand;
         this.setLayout(new BorderLayout());
         this.setBounds(0, 0, 600, 100);
 
-        JButton saveButton = new JButton("Save");
+        saveButton = new JButton("Save");
         saveButton.setFocusable(false);
         saveButton.addActionListener(this);
 
@@ -20,6 +29,22 @@ public class OptionPanel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == saveButton) {
+            saveGame();
+        }
+    }
 
+    // Method modelled after saveWorkRoom in
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
+    // EFFECTS: saves game to file
+    private void saveGame() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(hand);
+            jsonWriter.close();
+            System.out.println("Game saved to " + SAVE_FILE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to " + SAVE_FILE);
+        }
     }
 }
