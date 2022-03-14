@@ -1,8 +1,8 @@
 package ui;
 
 // Starts game
-public class Main {
+public class MemoryGame {
     public static void main(String[] args) {
-        new Game();
+        new MenuUI();
     }
 }
