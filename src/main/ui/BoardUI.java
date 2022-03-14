@@ -4,9 +4,11 @@ import model.Hand;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class BoardUI extends JFrame {
     private Hand hand;
+    private ArrayList<Integer> matchedCards;
     private OptionPanel optionPanel;
     private GamePanel gamePanel;
 
@@ -16,10 +18,11 @@ public class BoardUI extends JFrame {
         this.setSize(600, 650);
         this.setResizable(false);
 
-        hand = new Hand();
+        matchedCards = new ArrayList<>();
+        hand = new Hand(matchedCards);
 
-        optionPanel = new OptionPanel(hand);
-        gamePanel = new GamePanel(cards, hand);
+        optionPanel = new OptionPanel(hand, matchedCards);
+        gamePanel = new GamePanel(cards, hand, matchedCards);
 
         this.add(optionPanel, BorderLayout.NORTH);
         this.add(gamePanel);

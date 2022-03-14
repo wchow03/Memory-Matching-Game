@@ -4,6 +4,7 @@ import model.Hand;
 import org.json.JSONObject;
 
 import java.io.*;
+import java.util.ArrayList;
 
 // Modelled after JsonWriter class in
 // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
@@ -28,6 +29,13 @@ public class JsonWriter {
     // MODIFIES: this
     // EFFECTS: writes JSON representation of hand to file
     public void write(Hand h) {
+        JSONObject json = h.toJson();
+        saveToFile(json.toString(TAB));
+    }
+
+    // MODIFIES: this
+    // EFFECTS: writes JSON representation of hand and matched cards to file
+    public void write(Hand h, ArrayList<Integer> matchedCards) {
         JSONObject json = h.toJson();
         saveToFile(json.toString(TAB));
     }

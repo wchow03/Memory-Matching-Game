@@ -8,14 +8,17 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 public class OptionPanel extends JPanel implements ActionListener {
     private static final String SAVE_FILE = "./data/saveGame.json";
     private Hand hand;
+    private ArrayList<Integer> matchedCards;
     private JButton saveButton;
     private JsonWriter jsonWriter = new JsonWriter(SAVE_FILE);
 
-    public OptionPanel(Hand hand) {
+    public OptionPanel(Hand hand, ArrayList<Integer> matchedCards) {
+        this.matchedCards = matchedCards;
         this.hand = hand;
         this.setLayout(new BorderLayout());
         this.setBounds(0, 0, 600, 100);
@@ -40,7 +43,7 @@ public class OptionPanel extends JPanel implements ActionListener {
     private void saveGame() {
         try {
             jsonWriter.open();
-            jsonWriter.write(hand);
+            jsonWriter.write(hand, matchedCards);
             jsonWriter.close();
             System.out.println("Game saved to " + SAVE_FILE);
         } catch (FileNotFoundException e) {

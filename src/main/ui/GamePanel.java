@@ -13,9 +13,9 @@ public class GamePanel extends JPanel implements ActionListener {
     private Hand hand;
     private JButton[] buttons;
     private ArrayList<Integer> selectedCards = new ArrayList<>();
-    private ArrayList<Integer> matchedCards = new ArrayList<>();
+    private ArrayList<Integer> matchedCards;
 
-    public GamePanel(int cards, Hand hand) {
+    public GamePanel(int cards, Hand hand, ArrayList<Integer> matchedCards) {
         int row = cards / 2;
         int column = 4;
         this.setLayout(new GridLayout(row, column));
@@ -23,6 +23,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
         hand.createHand(cards);
         this.hand = hand;
+        this.matchedCards = matchedCards;
 
         createCardButtons(hand.getHandSize());
     }
@@ -50,6 +51,8 @@ public class GamePanel extends JPanel implements ActionListener {
                             JOptionPane.showMessageDialog(this, "You win!");
                             break;
                         }
+                        continue;
+
                     }
                 }
                 if (!matchedCards.contains(i)) {

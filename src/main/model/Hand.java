@@ -6,6 +6,7 @@ import persistence.Writable;
 import ui.GamePanel;
 
 import javax.swing.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -13,10 +14,18 @@ import java.util.Collections;
 // Represents a list of Cards
 public class Hand implements Writable {
     private ArrayList<Card> hand;
+    private ArrayList<Integer> matchedCards;
 
     // EFFECTS: creates an empty list of cards
     public Hand() {
         this.hand = new ArrayList<>();
+        this.matchedCards = null;
+    }
+
+    // EFFECTS: creates an empty list of cards and index of cards that have been matched
+    public Hand(ArrayList<Integer> matchedCards) {
+        this.hand = new ArrayList<>();
+        this.matchedCards = matchedCards;
     }
 
     // REQUIRES: a Card object
@@ -51,6 +60,9 @@ public class Hand implements Writable {
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("hand", handToJson());
+        if (!matchedCards.isEmpty()) {
+            json.put("Matched cards", matchedCardsToJson());
+        }
         return json;
     }
 
@@ -59,6 +71,14 @@ public class Hand implements Writable {
         JSONArray jsonArray = new JSONArray();
         for (Card c : hand) {
             jsonArray.put(c.toJson());
+        }
+        return jsonArray;
+    }
+
+    public JSONArray matchedCardsToJson() {
+        JSONArray jsonArray = new JSONArray();
+        for (int i = 0; i < matchedCards.size(); i++) {
+            jsonArray.put(matchedCards.get(i));
         }
         return jsonArray;
     }

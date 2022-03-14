@@ -1,14 +1,24 @@
-{"hand": [
-    {"cardLetter": "A"},
-    {"cardLetter": "F"},
-    {"cardLetter": "E"},
-    {"cardLetter": "C"},
-    {"cardLetter": "B"},
-    {"cardLetter": "E"},
-    {"cardLetter": "D"},
-    {"cardLetter": "D"},
-    {"cardLetter": "B"},
-    {"cardLetter": "F"},
-    {"cardLetter": "C"},
-    {"cardLetter": "A"}
-]}
+{
+    "Matched cards": [
+        6,
+        5,
+        0,
+        9,
+        2,
+        10
+    ],
+    "hand": [
+        {"cardLetter": "D"},
+        {"cardLetter": "E"},
+        {"cardLetter": "C"},
+        {"cardLetter": "F"},
+        {"cardLetter": "B"},
+        {"cardLetter": "A"},
+        {"cardLetter": "A"},
+        {"cardLetter": "B"},
+        {"cardLetter": "E"},
+        {"cardLetter": "D"},
+        {"cardLetter": "C"},
+        {"cardLetter": "F"}
+    ]
+}
