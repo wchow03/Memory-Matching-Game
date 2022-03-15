@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class OptionPanel extends JPanel implements ActionListener {
     private static final String SAVE_FILE = "./data/saveGame.json";
@@ -33,6 +34,7 @@ public class OptionPanel extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == saveButton) {
+            Collections.sort(matchedCards);
             saveGame();
         }
     }
@@ -43,7 +45,7 @@ public class OptionPanel extends JPanel implements ActionListener {
     private void saveGame() {
         try {
             jsonWriter.open();
-            jsonWriter.write(hand, matchedCards);
+            jsonWriter.write(hand);
             jsonWriter.close();
             System.out.println("Game saved to " + SAVE_FILE);
         } catch (FileNotFoundException e) {

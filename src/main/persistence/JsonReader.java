@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.stream.Stream;
 
 // Modelled after JsonReader class in
@@ -44,6 +45,9 @@ public class JsonReader {
     private Hand parseHand(JSONObject jsonObject) {
         Hand hand = new Hand();
         addCards(hand, jsonObject);
+        if (jsonObject.length() == 2) {
+            addMatchedCards(hand, jsonObject);
+        }
         return hand;
     }
 
@@ -63,5 +67,17 @@ public class JsonReader {
         String letter = jsonObject.getString("cardLetter");
         Card c = new Card(letter.charAt(0));
         hand.addCard(c);
+    }
+
+    // MODIFIES: hand
+    // EFFECTS: parses integer from JSON object of matched cards and adds it to array of integers,
+    // then adds to hand
+    private void addMatchedCards(Hand hand, JSONObject jsonObject) {
+        JSONArray jsonArray = jsonObject.getJSONArray("Matched cards");
+        ArrayList<Integer> matchedCards = new ArrayList<>();
+        for (Object json : jsonArray) {
+            matchedCards.add((Integer) json);
+        }
+        hand.setMatchedCards(matchedCards);
     }
 }

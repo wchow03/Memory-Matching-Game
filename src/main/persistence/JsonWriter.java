@@ -34,13 +34,6 @@ public class JsonWriter {
     }
 
     // MODIFIES: this
-    // EFFECTS: writes JSON representation of hand and matched cards to file
-    public void write(Hand h, ArrayList<Integer> matchedCards) {
-        JSONObject json = h.toJson();
-        saveToFile(json.toString(TAB));
-    }
-
-    // MODIFIES: this
     // EFFECTS: closes writer
     public void close() {
         writer.close();

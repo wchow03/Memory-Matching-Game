@@ -1,0 +1,12 @@
+{
+    "Matched cards": [
+        0,
+        2
+    ],
+    "hand": [
+        {"cardLetter": "B"},
+        {"cardLetter": "A"},
+        {"cardLetter": "B"},
+        {"cardLetter": "A"}
+    ]
+}

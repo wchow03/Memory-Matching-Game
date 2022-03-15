@@ -1,5 +1,9 @@
 package ui;
 
+import model.Hand;
+import persistence.JsonReader;
+import sun.nio.cs.HistoricallyNamedCharset;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -8,12 +12,15 @@ import java.io.IOException;
 
 // Represents the menu window
 public class MenuUI extends JFrame implements ActionListener {
+    private static final String SAVE_FILE = "./data/saveGame.json";
     private JRadioButton easyButton;
     private JRadioButton mediumButton;
     private JRadioButton hardButton;
     private JButton loadButton;
     private JButton startButton;
     private ButtonGroup mode;
+    private Hand hand = new Hand();
+    private JsonReader jsonReader = new JsonReader(SAVE_FILE);
 
     // EFFECTS: creates the menu window
     public MenuUI() {
@@ -68,9 +75,9 @@ public class MenuUI extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String difficulty = mode.getSelection().getActionCommand();
         this.dispose();
         if (e.getSource() == startButton) {
+            String difficulty = mode.getSelection().getActionCommand();
             if (difficulty.equals("Easy")) {
                 new BoardUI(6);
             } else if (difficulty.equals("Medium")) {
@@ -79,7 +86,21 @@ public class MenuUI extends JFrame implements ActionListener {
                 new BoardUI(10);
             }
         } else if (e.getSource() == loadButton) {
-            System.out.println("Loading game");
+            loadGame();
+            new BoardUI(hand);
+        }
+    }
+
+    // Method modelled after loadWorkRoom
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
+    // MODIFIES: this
+    // EFFECTS: loads saved hand from file
+    private void loadGame() {
+        try {
+            hand = jsonReader.read();
+            System.out.println("Game loaded from " + SAVE_FILE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from " + SAVE_FILE);
         }
     }
 }

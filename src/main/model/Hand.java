@@ -19,7 +19,7 @@ public class Hand implements Writable {
     // EFFECTS: creates an empty list of cards
     public Hand() {
         this.hand = new ArrayList<>();
-        this.matchedCards = null;
+        this.matchedCards = new ArrayList<>();
     }
 
     // EFFECTS: creates an empty list of cards and index of cards that have been matched
@@ -77,8 +77,8 @@ public class Hand implements Writable {
 
     public JSONArray matchedCardsToJson() {
         JSONArray jsonArray = new JSONArray();
-        for (int i = 0; i < matchedCards.size(); i++) {
-            jsonArray.put(matchedCards.get(i));
+        for (Integer matchedCard : matchedCards) {
+            jsonArray.put(matchedCard);
         }
         return jsonArray;
     }
@@ -89,6 +89,14 @@ public class Hand implements Writable {
 
     public ArrayList<Card> getHand() {
         return hand;
+    }
+
+    public ArrayList<Integer> getMatchedCards() {
+        return matchedCards;
+    }
+
+    public void setMatchedCards(ArrayList<Integer> matchedCards) {
+        this.matchedCards = matchedCards;
     }
 
     public int getHandSize() {
