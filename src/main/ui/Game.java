@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-// Memory matching game
+// Console Based Memory matching game
 public class Game {
     private static final String SAVE_FILE = "./data/saveHand.json";
     private Scanner scanner;

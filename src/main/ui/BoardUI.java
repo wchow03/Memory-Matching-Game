@@ -6,39 +6,38 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+// Represents the board where game is played and option to save is available
 public class BoardUI extends JFrame {
     private Hand hand;
     private ArrayList<Integer> matchedCards;
     private OptionPanel optionPanel;
     private GamePanel gamePanel;
 
+    // EFFECTS: creates a board with option and game panel
     public BoardUI(int cards) {
         setUp();
         matchedCards = new ArrayList<>();
         hand = new Hand(matchedCards);
 
-        optionPanel = new OptionPanel(hand);
+        optionPanel = new OptionPanel(hand, this);
         gamePanel = new GamePanel(cards, hand);
 
         addAndSetVisible();
     }
 
+    // EFFECTS: creates a board with option and game panel
     public BoardUI(Hand hand) {
-        this.setTitle("Memory Game");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(600, 650);
-        this.setResizable(false);
+        setUp();
         matchedCards = hand.getMatchedCards();
 
-        optionPanel = new OptionPanel(hand);
+        optionPanel = new OptionPanel(hand, this);
         gamePanel = new GamePanel(hand);
 
-        this.add(optionPanel, BorderLayout.NORTH);
-        this.add(gamePanel);
-
-        this.setVisible(true);
+        addAndSetVisible();
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets up frame of board
     private void setUp() {
         this.setTitle("Memory Game");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -46,6 +45,8 @@ public class BoardUI extends JFrame {
         this.setResizable(false);
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds option and game panel to frame and sets visible to true
     private void addAndSetVisible() {
         this.add(optionPanel, BorderLayout.NORTH);
         this.add(gamePanel);

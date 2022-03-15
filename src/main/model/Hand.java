@@ -75,6 +75,7 @@ public class Hand implements Writable {
         return jsonArray;
     }
 
+    // EFFECTS; returns indexes of matched cards to JSON array
     public JSONArray matchedCardsToJson() {
         JSONArray jsonArray = new JSONArray();
         for (Integer matchedCard : matchedCards) {

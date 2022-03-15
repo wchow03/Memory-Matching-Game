@@ -11,31 +11,50 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
 
+// Represents the option panel at top of board
 public class OptionPanel extends JPanel implements ActionListener {
     private static final String SAVE_FILE = "./data/saveGame.json";
+    private BoardUI board;
     private Hand hand;
     private ArrayList<Integer> matchedCards;
     private JButton saveButton;
+    private JButton resetButton;
     private JsonWriter jsonWriter = new JsonWriter(SAVE_FILE);
 
-    public OptionPanel(Hand hand) {
-        this.matchedCards = hand.getMatchedCards();
+    // MODIFIES: this
+    // EFFECTS: creates the save button
+    public OptionPanel(Hand hand, BoardUI board) {
+        this.board = board;
         this.hand = hand;
-        this.setLayout(new BorderLayout());
-        this.setBounds(0, 0, 600, 100);
+        this.matchedCards = hand.getMatchedCards();
+        this.setLayout(new GridLayout(1, 2));
 
         saveButton = new JButton("Save");
+        saveButton.setBounds(0, 0, 300, 100);
         saveButton.setFocusable(false);
         saveButton.addActionListener(this);
 
+        resetButton = new JButton("Reset");
+        resetButton.setBounds(300, 0, 300, 100);
+        resetButton.setFocusable(false);
+        resetButton.addActionListener(this);
+
         this.add(saveButton);
+        this.add(resetButton);
     }
 
+    // EFFECTS: save game if save button pressed.
+    // resets game to MenuUI if reset button pressed
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == saveButton) {
             Collections.sort(matchedCards);
             saveGame();
+        }
+        if (e.getSource() == resetButton) {
+            remove(board);
+            board.dispose();
+            new MenuUI();
         }
     }
 

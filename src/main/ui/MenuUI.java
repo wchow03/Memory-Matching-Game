@@ -2,7 +2,6 @@ package ui;
 
 import model.Hand;
 import persistence.JsonReader;
-import sun.nio.cs.HistoricallyNamedCharset;
 
 import javax.swing.*;
 import java.awt.*;

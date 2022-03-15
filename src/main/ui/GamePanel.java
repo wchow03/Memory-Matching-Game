@@ -1,7 +1,6 @@
 package ui;
 
 import model.Hand;
-import persistence.JsonWriter;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+// Represents game portion of application
 public class GamePanel extends JPanel implements ActionListener {
     private Hand hand;
     private JButton[] buttons;
@@ -45,7 +45,8 @@ public class GamePanel extends JPanel implements ActionListener {
         createCardButtonsFromSave();
     }
 
-    // creates handSize amount of buttons with questions marks
+    // MODIFIES: this
+    // EFFECTS: creates handSize amount of buttons with questions marks
     private void createCardButtons(int handSize) {
         for (int i = 0; i < handSize; i++) {
             buttons[i] = new JButton("?");
@@ -53,7 +54,8 @@ public class GamePanel extends JPanel implements ActionListener {
         }
     }
 
-    // creates amount of buttons from save. With cards have been matched face up (showing letter)
+    // MODIFIES: this
+    // EFFECTS: creates amount of buttons from save. With cards have been matched face up (showing letter)
     private void createCardButtonsFromSave() {
         int matchedCardIndex = 0;
         for (int i = 0; i < hand.getHandSize(); i++) {
@@ -70,8 +72,8 @@ public class GamePanel extends JPanel implements ActionListener {
     // MODIFIES: this
     // EFFECTS: sets button to have font, background colour, non focusable and adds action listener
     private void setUpButton(int i) {
-        buttons[i].setFont(new Font("Arial", Font.BOLD, 50));
-        buttons[i].setBackground(new Color(0xdfdbff));
+        buttons[i].setFont(new Font("Arial", Font.BOLD, 70));
+        buttons[i].setBackground(Color.white);
         buttons[i].setFocusable(false);
         buttons[i].addActionListener(this);
         this.add(buttons[i]);
