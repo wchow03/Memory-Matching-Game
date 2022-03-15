@@ -72,7 +72,7 @@ public class GamePanel extends JPanel implements ActionListener {
     // MODIFIES: this
     // EFFECTS: sets button to have font, background colour, non focusable and adds action listener
     private void setUpButton(int i) {
-        buttons[i].setFont(new Font("Arial", Font.BOLD, 70));
+        buttons[i].setFont(new Font("Ariel", Font.BOLD, 70));
         buttons[i].setBackground(Color.white);
         buttons[i].setFocusable(false);
         buttons[i].addActionListener(this);
@@ -92,6 +92,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 }
                 if (!matchedCards.contains(i)) {
                     buttons[i].setText(Character.toString(hand.getCardAt(i)));
+                    buttons[i].setBackground(Color.green);
                     selectedCards.add(i);
 
                     if (selectedCards.size() == 2 && !matchedCards.contains(selectedCards.get(0))
@@ -128,5 +129,4 @@ public class GamePanel extends JPanel implements ActionListener {
             JOptionPane.showMessageDialog(this, "You win!");
         }
     }
-
 }

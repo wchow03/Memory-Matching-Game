@@ -19,7 +19,7 @@ public class JsonWriterTest {
     void testWriterInvalidFile() {
         try {
             Hand hand = new Hand();
-            JsonWriter writer = new JsonWriter("./data/\2illegalName.json");
+            JsonWriter writer = new JsonWriter("./data/\0illegalName.json");
             writer.open();
             fail("IOException was expected");
         } catch (IOException e) {
