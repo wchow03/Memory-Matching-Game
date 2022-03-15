@@ -18,8 +18,8 @@ public class OptionPanel extends JPanel implements ActionListener {
     private JButton saveButton;
     private JsonWriter jsonWriter = new JsonWriter(SAVE_FILE);
 
-    public OptionPanel(Hand hand, ArrayList<Integer> matchedCards) {
-        this.matchedCards = matchedCards;
+    public OptionPanel(Hand hand) {
+        this.matchedCards = hand.getMatchedCards();
         this.hand = hand;
         this.setLayout(new BorderLayout());
         this.setBounds(0, 0, 600, 100);

@@ -17,59 +17,68 @@ public class GamePanel extends JPanel implements ActionListener {
     private ArrayList<Integer> clearButtonLetter = new ArrayList<>();
     private boolean matchFound = true;
 
-    public GamePanel(int cards, Hand hand, ArrayList<Integer> matchedCards) {
+    // EFFECTS: creates a panel with cards * 2 buttons and no matched cards
+    public GamePanel(int cards, Hand hand) {
+        this.hand = hand;
+        this.matchedCards = hand.getMatchedCards();
+
         int row = cards / 2;
         int column = 4;
         this.setLayout(new GridLayout(row, column));
         buttons = new JButton[cards * 2];
 
         hand.createHand(cards);
-        this.hand = hand;
-        this.matchedCards = matchedCards;
 
         createCardButtons(hand.getHandSize());
     }
 
-    public GamePanel(Hand hand, ArrayList<Integer> matchedCards) {
+    // EFFECTS: creates a panel with hand.getHandSize() buttons and cards that have been matched
+    public GamePanel(Hand hand) {
+        this.hand = hand;
+        this.matchedCards = hand.getMatchedCards();
+
         int row = hand.getHandSize() / 4;
         int column = 4;
         this.setLayout(new GridLayout(row, column));
         buttons = new JButton[hand.getHandSize()];
 
-        this.hand = hand;
-        this.matchedCards = matchedCards;
-
         createCardButtonsFromSave();
     }
 
+    // creates handSize amount of buttons with questions marks
     private void createCardButtons(int handSize) {
         for (int i = 0; i < handSize; i++) {
             buttons[i] = new JButton("?");
-            buttons[i].setFont(new Font("Arial", Font.BOLD, 50));
-            buttons[i].setBackground(new Color(0xdfdbff));
-            buttons[i].setFocusable(false);
-            buttons[i].addActionListener(this);
-            this.add(buttons[i]);
+            setUpButton(i);
         }
     }
 
+    // creates amount of buttons from save. With cards have been matched face up (showing letter)
     private void createCardButtonsFromSave() {
         int matchedCardIndex = 0;
         for (int i = 0; i < hand.getHandSize(); i++) {
-            if (i == matchedCards.get(matchedCardIndex)) {
+            if (matchedCardIndex < matchedCards.size() && matchedCards.get(matchedCardIndex) == i) {
                 buttons[i] = new JButton(String.valueOf(hand.getCardAt(i)));
                 matchedCardIndex++;
             } else {
                 buttons[i] = new JButton("?");
             }
-            buttons[i].setFont(new Font("Arial", Font.BOLD, 50));
-            buttons[i].setBackground(new Color(0xdfdbff));
-            buttons[i].setFocusable(false);
-            buttons[i].addActionListener(this);
-            this.add(buttons[i]);
+            setUpButton(i);
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets button to have font, background colour, non focusable and adds action listener
+    private void setUpButton(int i) {
+        buttons[i].setFont(new Font("Arial", Font.BOLD, 50));
+        buttons[i].setBackground(new Color(0xdfdbff));
+        buttons[i].setFocusable(false);
+        buttons[i].addActionListener(this);
+        this.add(buttons[i]);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: checks if two buttons were pressed
     @Override
     public void actionPerformed(ActionEvent e) {
         for (int i = 0; i < hand.getHandSize(); i++) {
@@ -95,6 +104,8 @@ public class GamePanel extends JPanel implements ActionListener {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: compares the two letters at pressed buttons
     private void compareCards(int firstCardIndex, int secondCardIndex) {
         if ((firstCardIndex != secondCardIndex)
                 && (hand.getCardAt(firstCardIndex) == hand.getCardAt(secondCardIndex))) {
@@ -109,6 +120,7 @@ public class GamePanel extends JPanel implements ActionListener {
         selectedCards.clear();
     }
 
+    // EFFECTS: shows a pop up window if size of cards matched is same as hand size
     private void checkWin() {
         if (matchedCards.size() == hand.getHandSize()) {
             JOptionPane.showMessageDialog(this, "You win!");

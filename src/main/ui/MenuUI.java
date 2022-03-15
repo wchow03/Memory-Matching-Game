@@ -19,9 +19,10 @@ public class MenuUI extends JFrame implements ActionListener {
     private JButton loadButton;
     private JButton startButton;
     private ButtonGroup mode;
-    private Hand hand = new Hand();
+    private Hand hand;
     private JsonReader jsonReader = new JsonReader(SAVE_FILE);
 
+    // MODIFIES: this
     // EFFECTS: creates the menu window
     public MenuUI() {
         this.setTitle("Menu");
@@ -35,6 +36,7 @@ public class MenuUI extends JFrame implements ActionListener {
         this.setVisible(true);
     }
 
+    // MODIFIES: this
     // EFFECTS: creates mode buttons
     private void createModeButtons() {
         easyButton = new JRadioButton("Easy (12 cards)");
@@ -59,6 +61,8 @@ public class MenuUI extends JFrame implements ActionListener {
         this.add(hardButton);
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates load and start buttons
     private void createLoadStartButtons() {
         loadButton = new JButton("Load");
         startButton = new JButton("Start");
@@ -73,6 +77,9 @@ public class MenuUI extends JFrame implements ActionListener {
         this.add(startButton);
     }
 
+    // MODIFIES: hand
+    // EFFECTS: creates a new BoardUI depending on which mode is selected.
+    // if load is selected, loads game from last save, creating a BoardUI with the saved hand
     @Override
     public void actionPerformed(ActionEvent e) {
         this.dispose();
@@ -94,7 +101,7 @@ public class MenuUI extends JFrame implements ActionListener {
     // Method modelled after loadWorkRoom
     // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
     // MODIFIES: this
-    // EFFECTS: loads saved hand from file
+    // EFFECTS: loads saved game from file
     private void loadGame() {
         try {
             hand = jsonReader.read();

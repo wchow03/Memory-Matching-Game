@@ -17,8 +17,8 @@ public class BoardUI extends JFrame {
         matchedCards = new ArrayList<>();
         hand = new Hand(matchedCards);
 
-        optionPanel = new OptionPanel(hand, matchedCards);
-        gamePanel = new GamePanel(cards, hand, matchedCards);
+        optionPanel = new OptionPanel(hand);
+        gamePanel = new GamePanel(cards, hand);
 
         addAndSetVisible();
     }
@@ -30,8 +30,8 @@ public class BoardUI extends JFrame {
         this.setResizable(false);
         matchedCards = hand.getMatchedCards();
 
-        optionPanel = new OptionPanel(hand, matchedCards);
-        gamePanel = new GamePanel(hand, matchedCards);
+        optionPanel = new OptionPanel(hand);
+        gamePanel = new GamePanel(hand);
 
         this.add(optionPanel, BorderLayout.NORTH);
         this.add(gamePanel);
