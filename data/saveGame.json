@@ -1,32 +1,32 @@
 {
     "Matched cards": [
-        1,
         2,
-        3,
         5,
         6,
-        7,
-        8,
         10,
         11,
-        13
+        14
     ],
     "hand": [
         {"cardLetter": "A"},
+        {"cardLetter": "I"},
+        {"cardLetter": "E"},
+        {"cardLetter": "C"},
+        {"cardLetter": "J"},
+        {"cardLetter": "E"},
+        {"cardLetter": "H"},
         {"cardLetter": "D"},
-        {"cardLetter": "H"},
         {"cardLetter": "F"},
         {"cardLetter": "G"},
-        {"cardLetter": "C"},
-        {"cardLetter": "E"},
-        {"cardLetter": "C"},
-        {"cardLetter": "H"},
         {"cardLetter": "B"},
-        {"cardLetter": "E"},
-        {"cardLetter": "F"},
+        {"cardLetter": "B"},
         {"cardLetter": "G"},
+        {"cardLetter": "I"},
+        {"cardLetter": "H"},
+        {"cardLetter": "J"},
+        {"cardLetter": "C"},
         {"cardLetter": "D"},
         {"cardLetter": "A"},
-        {"cardLetter": "B"}
+        {"cardLetter": "F"}
     ]
 }

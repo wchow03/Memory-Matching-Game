@@ -63,7 +63,7 @@ public class GamePanel extends JPanel implements ActionListener {
         ImageIcon js = new ImageIcon("./data/JSLogo.png");
         ImageIcon python = new ImageIcon("./data/PythonLogo.png");
         ImageIcon racket = new ImageIcon("./data/RacketLogo.png");
-        ImageIcon ruby = new ImageIcon("./data/RubyLogo.png");
+        ImageIcon html = new ImageIcon("./data/HTMLLogo.png");
         ImageIcon swift = new ImageIcon("./data/SwiftLogo.png");
         logos.add(csharp);
         logos.add(cplusplus);
@@ -73,7 +73,7 @@ public class GamePanel extends JPanel implements ActionListener {
         logos.add(js);
         logos.add(python);
         logos.add(racket);
-        logos.add(ruby);
+        logos.add(html);
         logos.add(swift);
     }
 
@@ -184,7 +184,7 @@ public class GamePanel extends JPanel implements ActionListener {
     // EFFECTS: resizes icon to fit JButton
     private ImageIcon resizeIcon(ImageIcon icon) {
         Image img = icon.getImage();
-        Image resized = img.getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH);
+        Image resized = img.getScaledInstance(105, 105, java.awt.Image.SCALE_SMOOTH);
         return new ImageIcon(resized);
     }
 
