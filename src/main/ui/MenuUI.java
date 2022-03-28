@@ -83,13 +83,17 @@ public class MenuUI extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         this.dispose();
         if (e.getSource() == startButton) {
-            String difficulty = mode.getSelection().getActionCommand();
-            if (difficulty.equals("Easy")) {
-                new BoardUI(6);
-            } else if (difficulty.equals("Medium")) {
-                new BoardUI(8);
-            } else if (difficulty.equals("Hard")) {
-                new BoardUI(10);
+            try {
+                String difficulty = mode.getSelection().getActionCommand();
+                if (difficulty.equals("Easy")) {
+                    new BoardUI(6);
+                } else if (difficulty.equals("Medium")) {
+                    new BoardUI(8);
+                } else if (difficulty.equals("Hard")) {
+                    new BoardUI(10);
+                }
+            } catch (NullPointerException ex) {
+                new MenuUI();
             }
         } else if (e.getSource() == loadButton) {
             loadGame();
