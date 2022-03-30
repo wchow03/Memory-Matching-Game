@@ -48,7 +48,7 @@ public class BoardUI extends JFrame {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                printLog(EventLog.getInstance());
+                new LogPrinter(EventLog.getInstance());
                 System.exit(0);
             }
         });
@@ -63,11 +63,5 @@ public class BoardUI extends JFrame {
         this.add(gamePanel);
 
         this.setVisible(true);
-    }
-
-    public void printLog(EventLog el) {
-        for (Event next : el) {
-            System.out.println(next.toString() + "\n");
-        }
     }
 }

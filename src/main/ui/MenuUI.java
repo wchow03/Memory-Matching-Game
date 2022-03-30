@@ -33,7 +33,7 @@ public class MenuUI extends JFrame implements ActionListener {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                printLog(EventLog.getInstance());
+                new LogPrinter(EventLog.getInstance());
                 System.exit(0);
             }
         });
@@ -122,12 +122,6 @@ public class MenuUI extends JFrame implements ActionListener {
             System.out.println("Game loaded from " + SAVE_FILE);
         } catch (IOException e) {
             System.out.println("Unable to read from " + SAVE_FILE);
-        }
-    }
-
-    public void printLog(EventLog el) {
-        for (Event next : el) {
-            System.out.println(next.toString() + "\n");
         }
     }
 }
