@@ -1,5 +1,6 @@
 package ui;
 
+import model.EventLog;
 import model.Hand;
 import persistence.JsonWriter;
 
@@ -52,6 +53,9 @@ public class OptionPanel extends JPanel implements ActionListener {
             saveGame();
         }
         if (e.getSource() == resetButton) {
+            for (int i = hand.getHandSize() - 1; i >= 0; i--) {
+                hand.removeCard(i);
+            }
             remove(board);
             board.dispose();
             new MenuUI();

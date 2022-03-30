@@ -1,12 +1,16 @@
 package ui;
 
+import model.EventLog;
 import model.Hand;
 import persistence.JsonReader;
+import model.Event;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 
 // Represents the menu window
@@ -25,7 +29,14 @@ public class MenuUI extends JFrame implements ActionListener {
     // EFFECTS: creates the menu window
     public MenuUI() {
         this.setTitle("Menu");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                printLog(EventLog.getInstance());
+                System.exit(0);
+            }
+        });
         this.setSize(500, 125);
         this.setResizable(false);
         this.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 10));
@@ -111,6 +122,12 @@ public class MenuUI extends JFrame implements ActionListener {
             System.out.println("Game loaded from " + SAVE_FILE);
         } catch (IOException e) {
             System.out.println("Unable to read from " + SAVE_FILE);
+        }
+    }
+
+    public void printLog(EventLog el) {
+        for (Event next : el) {
+            System.out.println(next.toString() + "\n");
         }
     }
 }

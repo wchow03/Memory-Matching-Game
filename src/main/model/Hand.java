@@ -28,6 +28,7 @@ public class Hand implements Writable {
     // MODIFIES: this
     // EFFECTS: adds card to list of cards
     public void addCard(Card card) {
+        EventLog.getInstance().logEvent(new Event("Card added to hand with value " + card.getLetter()));
         hand.add(card);
     }
 
@@ -35,6 +36,7 @@ public class Hand implements Writable {
     // MODIFIES: this
     // EFFECTS: removes card at specified index
     public void removeCard(int i) {
+        EventLog.getInstance().logEvent(new Event("Card removed from hand with value " + hand.get(i).getLetter()));
         hand.remove(i);
     }
 
@@ -47,6 +49,8 @@ public class Hand implements Writable {
             Card card = new Card((char)l);
             hand.add(card);
             hand.add(card);
+            EventLog.getInstance().logEvent(new Event("Card added to hand with value " + card.getLetter()));
+            EventLog.getInstance().logEvent(new Event("Card added to hand with value " + card.getLetter()));
             l++;
         }
         Collections.shuffle(hand);

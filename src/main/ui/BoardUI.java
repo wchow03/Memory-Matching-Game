@@ -1,9 +1,13 @@
 package ui;
 
+import model.Event;
+import model.EventLog;
 import model.Hand;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 // Represents the board where game is played and option to save is available
@@ -40,7 +44,14 @@ public class BoardUI extends JFrame {
     // EFFECTS: sets up frame of board
     private void setUp() {
         this.setTitle("Memory Game");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                printLog(EventLog.getInstance());
+                System.exit(0);
+            }
+        });
         this.setSize(600, 650);
         this.setResizable(false);
     }
@@ -52,5 +63,11 @@ public class BoardUI extends JFrame {
         this.add(gamePanel);
 
         this.setVisible(true);
+    }
+
+    public void printLog(EventLog el) {
+        for (Event next : el) {
+            System.out.println(next.toString() + "\n");
+        }
     }
 }
