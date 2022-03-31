@@ -98,3 +98,10 @@ Card removed from hand with value F
 
 Tue Mar 29 20:45:01 PDT 2022
 Card removed from hand with value B
+
+### Phase 4: Task 3
+
+
+Instead of having multiple private fields of a Hand object. I 
+would have one protected field of a Hand object which can be used
+throughout so only MenuUI would have an association to Hand.
