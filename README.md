@@ -1,7 +1,7 @@
 # Memory Matching Game Project
 ### William Chow
 
-For the term project I have decided to create a
+For my software construction course project I have decided to create a
 **memory matching game**. The game consists of multiple
 down facing cards where a user can then choose two of them
 and see if they match. The front side of the cards will
@@ -15,6 +15,8 @@ because it helps develop memorization skills while
 being fun to play. The goal of this project was
 to design a game that can be played by *anyone* as it is
 not too difficult.
+
+<!-- 
 
 ### User Stories
 
@@ -100,7 +102,7 @@ Tue Mar 29 20:45:01 PDT 2022
 Card removed from hand with value B
 
 ### Phase 4: Task 3
-
+-->
 
 Instead of having multiple private fields of a Hand object. I 
 would have one protected field of a Hand object which can be used
